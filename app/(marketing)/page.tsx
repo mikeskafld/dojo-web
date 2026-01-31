@@ -6,6 +6,7 @@ import { DojoFeaturesSection } from "@/app/(marketing)/dojo-features"
 import { HowItWorksSection } from "@/app/(marketing)/how-it-works-section"
 import { WhyDojoSection } from "@/app/(marketing)/why-dojo-section"
 import { CreatorApplicationSection } from "@/app/(marketing)/creator-application-section"
+import { LearnerWaitlistSection } from "@/app/(marketing)/learner-waitlist-section"
 import { LandingHeroSection } from "@/app/(marketing)/marketing-hero"
 
 import { MarketingCTA } from "./marketing-cta"
@@ -77,6 +78,9 @@ export default async function LandingPage() {
       </FadeIn>
       <FadeIn>
         <CreatorApplicationSection />
+      </FadeIn>
+      <FadeIn>
+        <LearnerWaitlistSection />
       </FadeIn>
       <FadeIn>
         <MarketingQuote />

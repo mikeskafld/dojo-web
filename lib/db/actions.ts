@@ -198,3 +198,87 @@ export async function submitCreatorApplication(
     }
   }
 }
+
+// Learner Waitlist Form Types and Action
+export type LearnerWaitlistFormData = {
+  email: string
+  name?: string
+  interests: string[]
+}
+
+export type LearnerWaitlistResult = {
+  success: boolean
+  message: string
+  error?: string
+}
+
+export async function submitLearnerWaitlist(
+  data: LearnerWaitlistFormData
+): Promise<LearnerWaitlistResult> {
+  const supabase = await createClient()
+
+  // Validate required fields
+  if (!data.email) {
+    return {
+      success: false,
+      message: "Email is required",
+      error: "VALIDATION_ERROR",
+    }
+  }
+
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(data.email)) {
+    return {
+      success: false,
+      message: "Please enter a valid email address",
+      error: "INVALID_EMAIL",
+    }
+  }
+
+  // Validate interests (at least one required)
+  if (!data.interests || data.interests.length === 0) {
+    return {
+      success: false,
+      message: "Please select at least one interest",
+      error: "VALIDATION_ERROR",
+    }
+  }
+
+  try {
+    const { error } = await supabase.from("learner_waitlist").insert({
+      email: data.email.toLowerCase(),
+      name: data.name?.trim() || null,
+      interests: data.interests,
+    })
+
+    if (error) {
+      // Handle duplicate email error
+      if (error.code === "23505") {
+        return {
+          success: false,
+          message: "This email is already on the waitlist",
+          error: "DUPLICATE_EMAIL",
+        }
+      }
+      console.error("Error submitting learner waitlist:", error)
+      return {
+        success: false,
+        message: "Something went wrong. Please try again.",
+        error: error.message,
+      }
+    }
+
+    return {
+      success: true,
+      message: "You're on the list! We'll notify you when we launch.",
+    }
+  } catch (error) {
+    console.error("Error submitting learner waitlist:", error)
+    return {
+      success: false,
+      message: "Something went wrong. Please try again.",
+      error: "UNKNOWN_ERROR",
+    }
+  }
+}

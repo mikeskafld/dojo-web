@@ -214,3 +214,27 @@
   - Section placement: Learner waitlist after creator application maintains natural flow
 
 ---
+
+## 2026-01-30 - US-009: Create dedicated For Creators page
+- **Status**: Completed
+- **Files**:
+  - app/(marketing)/for-creators/page.tsx (new)
+- **What was implemented**:
+  - Created /for-creators route as a client component page
+  - Hero section with "Turn Your Expertise Into Scalable Income" headline and badge
+  - Animated background gradient effects and glow orbs matching homepage hero
+  - CTA buttons: "Apply Now" (links to #apply) and "See How It Works" (links to /how-it-works)
+  - Value props section with 4 cards: 70% Revenue Share, AI Handles Course Structure, 10K+ Learners Through Feed, Real-Time Analytics Dashboard
+  - "The Creator Struggle" problem statement section with 4 pain points: Hours of Editing, Algorithm Anxiety, Revenue Uncertainty, Burnout Cycle
+  - "The Dojo Solution" teaser with cyan accent styling
+  - Embedded CreatorApplicationSection component at bottom with FadeIn wrapper
+  - Scroll-triggered animations using useInView with staggered reveals
+  - Hover effects on cards: y-lift, border glow with --dojo-border-accent
+- **Learnings for future iterations**:
+  - Dedicated pages can reuse existing section components (CreatorApplicationSection) with FadeIn wrapper
+  - Badge pattern: inline-flex with gap, rounded-full, bg-[var(--dojo-cyan-muted)] for "For Creators" type badges
+  - Problem statement pattern: Use destructive color variants (bg-destructive/10, text-destructive) for pain points
+  - Solution teaser pattern: Follow problem with cyan-accented solution preview to create contrast
+  - Page follows same animation patterns as homepage: useInView with once: true, amount: 0.2
+
+---

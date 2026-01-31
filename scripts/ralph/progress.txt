@@ -14,6 +14,7 @@ Started: Sat Jan 31 10:39:57 PST 2026
 - Form section IDs: `#apply` for creator application, `#waitlist` for learner waitlist - use for anchor navigation
 - Suspense boundaries: Components using `useSearchParams()` must be wrapped in `<Suspense>` for Next.js 15 static generation
 - Navigation: Marketing navbar links defined in `navItems` array in marketing-navbar.tsx - shared by desktop and mobile
+- Blog posts: MDX files in `app/(marketing)/blog/posts/[slug].mdx` - frontmatter needs title, publishedAt, category, description, summary
 
 ---
 
@@ -221,4 +222,23 @@ Started: Sat Jan 31 10:39:57 PST 2026
   - Navigation links are managed in a single navItems array for consistency
   - Both desktop nav (lg:flex) and mobile Sheet use same navItems.map() pattern
   - Adding a nav item requires only one line change in the array
+---
+
+## 2026-01-31 12:49 - US-014
+- What was implemented: Created micro-learning science blog post, removed Vibe Marketing post
+- Files changed:
+  - `app/(marketing)/blog/posts/why-micro-learning-works.mdx`: NEW - "Why Micro-Learning Works: The Science Behind Dojo"
+  - `app/(marketing)/blog/posts/example.mdx`: DELETED - Old "Vibe Marketing" post
+- **Content added:**
+  - Cognitive Load Theory (John Sweller) - why information overload hurts learning
+  - Spacing Effect (Ebbinghaus) - why spaced repetition beats cramming
+  - Active Recall - why practice beats passive consumption
+  - Practitioner-based learning - why real experts teach better than academics
+  - 3x retention advantage claim from combining these principles
+- **Learnings for future iterations:**
+  - Blog posts are MDX files in `app/(marketing)/blog/posts/[slug].mdx`
+  - Slug is derived from filename (why-micro-learning-works.mdx → /blog/why-micro-learning-works)
+  - Frontmatter requires: title, publishedAt, category, description, summary
+  - Build output shows which blog posts are being generated (good verification)
+  - Use quotes with shell paths containing parentheses: `"app/(marketing)/..."`
 ---

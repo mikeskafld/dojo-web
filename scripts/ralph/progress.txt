@@ -134,3 +134,42 @@ Started: Sat Jan 31 10:39:57 PST 2026
   - Each section can read mode from URL params independently (no prop drilling needed)
   - Added new icons: Upload, TrendingUp, Clock, BookOpen, Target, Award
 ---
+
+## 2026-01-31 14:00 - US-010
+- What was implemented: Dynamic Why Dojo section based on audience mode
+- Files changed:
+  - `app/(marketing)/why-dojo-section.tsx`: Converted competitors array to object with creator/learner content, added AnimatePresence
+- **Creator mode comparisons (4):**
+  - YouTube: 70% revenue share vs YouTube's ~55%, paid subscribers, no algorithm chase
+  - Skillshare: Keep IP ownership, AI handles structure, transparent earnings
+  - Patreon: AI transforms content, built-in learning tools, reach active learners
+  - Teachable: Built-in discovery, AI production, marketplace exposure
+- **Learner mode comparisons (4):**
+  - Skillshare/Udemy: AI transforms to micro-lessons, 5min vs 5hrs, no 2x speed
+  - Duolingo: Real practitioner knowledge, any skill not just languages
+  - TikTok/Shorts: Structured paths, progressive learning, 3x retention
+  - MasterClass: Learn from practitioners, interactive exercises, affordable
+- **Learnings for future iterations:**
+  - File had pre-existing mode implementation but with a syntax error (missing AnimatePresence closing tag)
+  - Always run lint to catch JSX tag mismatches before committing
+  - Added new icons: Youtube, DollarSign (for Teachable comparison)
+---
+
+## 2026-01-31 14:15 - US-011
+- What was implemented: Dynamic How It Works section based on audience mode
+- Files changed:
+  - `app/(marketing)/how-it-works-section.tsx`: Converted static flow to dynamic creatorFlow/learnerFlow objects
+- **Creator flow (Upload → AI → Monetization):**
+  - Input: YouTube Videos, Course Material, Podcast Episodes
+  - Process (Dojo Engine): Smart Segmentation, Auto-Structure, Engagement Boost
+  - Output: Passive Income card showing subscribers (1,247) and monthly revenue ($2,840)
+- **Learner flow (Discover → Learn → Master):**
+  - Input: Browse Topics, Set Goals, Choose Path
+  - Process (Personalized Learning): Smart Matching, Bite-Sized Delivery, Adaptive Pacing
+  - Output: Skill Mastery card showing progress (78%) and streak (12 days)
+- **Learnings for future iterations:**
+  - Remove unused imports (Play, Clock, CheckCircle, Upload) to avoid lint warnings
+  - Each flow can have different output card designs - creator shows revenue, learner shows progress
+  - Section subheading also changes dynamically to match the audience focus
+  - Icons added: Compass, Target, Award, Zap for learner flow; DollarSign, TrendingUp for creator flow
+---

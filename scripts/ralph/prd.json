@@ -153,8 +153,8 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 10,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Converted competitors array to object with creator/learner keys. Creator mode compares vs YouTube, Skillshare, Patreon, Teachable. Learner mode compares vs Skillshare/Udemy, Duolingo, TikTok/Shorts, MasterClass. Added AnimatePresence for smooth mode transitions."
     },
     {
       "id": "US-011",
@@ -168,8 +168,8 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 11,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Created creatorFlow and learnerFlow objects. Creator: YouTube/Course/Podcast input → Dojo Engine (segmentation, auto-structure, engagement) → Passive Income output. Learner: Browse/Goals/Path input → Personalized Learning (matching, delivery, pacing) → Skill Mastery output. AnimatePresence for smooth transitions."
     },
     {
       "id": "US-012",

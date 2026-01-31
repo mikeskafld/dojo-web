@@ -30,8 +30,8 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 2,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Rewrote Terms page with 10 sections covering: Acceptance of Terms, Platform Description, Creator Content and Uploads, Creator Revenue Share, Learner Subscriptions, Acceptable Use, Disclaimer of Warranties, Limitation of Liability, Changes to Terms, Contact Information"
     },
     {
       "id": "US-003",

@@ -21,3 +21,15 @@ Started: Sat Jan 31 10:39:57 PST 2026
   - Error messages should include function name prefix for easier debugging
   - TypeScript typechecks pass even without POLAR_ACCESS_TOKEN (uses empty string fallback)
 ---
+
+## 2026-01-31 11:15 - US-002
+- What was implemented: Complete rewrite of Terms of Service page for Dojo
+- Files changed:
+  - `app/(marketing)/terms/page.tsx`: Replaced all content from generic "Vibe Marketing" to Dojo-specific terms
+- **Learnings for future iterations:**
+  - Legal pages use `FadeIn`, `GradientHeading`, and `SectionCard` components for consistent styling
+  - Use `&quot;` for double quotes in JSX text to avoid escaping issues
+  - Contact email links should use `text-dojo-cyan hover:underline` class for consistency with site theme
+  - Terms page structure: numbered sections with h2 headings, ul lists for bullet points
+  - The page is a server component (no "use client" directive needed for static content)
+---

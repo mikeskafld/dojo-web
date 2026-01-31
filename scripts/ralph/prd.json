@@ -103,8 +103,8 @@
         "Verify in browser"
       ],
       "priority": 6,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Created WhyDojoSection component with 4 competitor comparison cards (Skillshare/Udemy, Duolingo, TikTok, MasterClass), each showing what they do well and what Dojo adds"
     },
     {
       "id": "US-007",

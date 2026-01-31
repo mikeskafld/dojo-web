@@ -134,3 +134,25 @@
   - lucide-react icons for content types: Video, FileVideo, Podcast
 
 ---
+
+## 2026-01-30 - US-006: Create competitive differentiation section
+- **Status**: Completed
+- **Files**:
+  - app/(marketing)/why-dojo-section.tsx (new)
+  - app/(marketing)/page.tsx (updated import)
+- **What was implemented**:
+  - Created WhyDojoSection component with "Why Dojo?" headline
+  - 4 competitor comparison cards: Skillshare/Udemy, Duolingo, TikTok, MasterClass
+  - Each card shows: competitor icon, name, what they do well (italicized quote), arrow divider, and 3 bullet points of what Dojo adds
+  - Responsive grid: grid-cols-1 md:grid-cols-2 (2x2 on desktop, 1x4 on mobile)
+  - Scroll-triggered staggered animations using useInView and motion variants
+  - Hover effects: y:-6 lift, border glow with --dojo-border-accent
+  - Icons from lucide-react: GraduationCap, Gamepad2, MonitorPlay, Star
+  - Divider between "they do well" and "Dojo adds" uses ArrowRight icon
+- **Learnings for future iterations**:
+  - Competitor comparison pattern: italicized quote for their strength, bullet points for Dojo's additions
+  - Use &ldquo; and &rdquo; for proper curly quotes in JSX
+  - ArrowRight with text in a divider pattern: flex-1 h-px + icon + text + flex-1 h-px
+  - Consistent card pattern from DojoFeaturesSection works well across sections
+
+---

@@ -12,6 +12,8 @@ Started: Sat Jan 31 10:39:57 PST 2026
 - URL parameters: use `useSearchParams()` to read, `router.replace()` with `{ scroll: false }` for shallow routing
 - Audience mode: `AudienceType` exported from marketing-hero.tsx, values are "creator" | "learner"
 - Form section IDs: `#apply` for creator application, `#waitlist` for learner waitlist - use for anchor navigation
+- Suspense boundaries: Components using `useSearchParams()` must be wrapped in `<Suspense>` for Next.js 15 static generation
+- Navigation: Marketing navbar links defined in `navItems` array in marketing-navbar.tsx - shared by desktop and mobile
 
 ---
 
@@ -191,4 +193,32 @@ Started: Sat Jan 31 10:39:57 PST 2026
   - `router.push()` with `{ scroll: false }` prevents automatic scroll, then use `setTimeout` + `scrollIntoView` for custom scroll behavior
   - Cross-promo text uses "Want to [learn/teach] instead?" pattern for clarity
   - Keep form IDs consistent (#apply for creator, #waitlist for learner) for anchor navigation
+---
+
+## 2026-01-31 14:45 - Suspense Boundary Fix
+- What was implemented: Added Suspense boundaries to fix Next.js 15 build errors
+- Files changed:
+  - `app/(marketing)/page.tsx`: Wrapped Hero, Features, How It Works, Why Dojo, Application/Waitlist sections in Suspense
+  - `app/(marketing)/for-creators/page.tsx`: Wrapped CreatorApplicationSection in Suspense
+  - `app/(marketing)/for-learners/page.tsx`: Wrapped LearnerWaitlistSection in Suspense
+- **Learnings for future iterations:**
+  - Next.js 15 requires Suspense boundaries around components using `useSearchParams()` for static generation
+  - Error message: "useSearchParams() should be wrapped in a suspense boundary"
+  - Import Suspense from 'react', wrap client components that use useSearchParams
+  - This affects all pages that embed components reading URL params
+---
+
+## 2026-01-31 15:00 - US-013
+- What was implemented: Added Pricing link to main navigation
+- Files changed:
+  - `app/(marketing)/marketing-navbar.tsx`: Added Pricing to navItems array between For Learners and About
+- **Implementation details:**
+  - navItems array is shared between desktop and mobile menu, so one change affects both
+  - Order: How It Works → For Creators → For Learners → Pricing → About
+  - Link href: /pricing
+  - Active state detection uses same isActive() helper that checks pathname.startsWith()
+- **Learnings for future iterations:**
+  - Navigation links are managed in a single navItems array for consistency
+  - Both desktop nav (lg:flex) and mobile Sheet use same navItems.map() pattern
+  - Adding a nav item requires only one line change in the array
 ---

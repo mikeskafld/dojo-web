@@ -199,8 +199,8 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 13,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Added Pricing to navItems array between For Learners and About. Both desktop nav and mobile menu use same navItems array, so Pricing appears in both."
     },
     {
       "id": "US-014",

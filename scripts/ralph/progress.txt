@@ -68,3 +68,19 @@ Started: Sat Jan 31 10:39:57 PST 2026
   - Answers should be concise (1-3 sentences) for grid display
   - Include calls-to-action where appropriate (e.g., "Check our pricing page")
 ---
+
+## 2026-01-31 13:00 - US-006
+- What was implemented: Replaced developer testimonials with creator-focused quotes
+- Files changed:
+  - `app/(marketing)/marketing-testimonial.tsx`: Replaced 13 fake developer testimonials with 10 creator quotes
+- **Changes made:**
+  - New heading: "What Creators Are Saying" (was "Customers")
+  - Each quote has: name, niche tag (e.g., "Fitness Creator"), and creator-relevant quote
+  - Topics covered: revenue share excitement, AI content transformation, ownership retention, passive income, micro-lesson format
+  - Creator niches: Fitness, Photography, Culinary, Music, Language, Business, Writing, Design, Yoga, Developer Education
+- **Learnings for future iterations:**
+  - Username field can include niche tag (e.g., "@handle • Fitness Creator")
+  - Reviews array is split in half for two marquee rows (firstRow, secondRow)
+  - Images come from `/tweet-avatars/` directory - reuse existing images
+  - Keep quotes under 150 characters for good card display
+---

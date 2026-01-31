@@ -94,7 +94,7 @@ export function MainNav({ session }: MainNavProps) {
                   asChild
                   className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-5"
                 >
-                  <Link href="#waitlist">
+                  <Link href="/#waitlist">
                     Get Early Access
                   </Link>
                 </Button>
@@ -144,7 +144,7 @@ export function MainNav({ session }: MainNavProps) {
                         asChild
                         className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
                       >
-                        <Link href="#waitlist">
+                        <Link href="/#waitlist">
                           Get Early Access
                         </Link>
                       </Button>

@@ -17,8 +17,45 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Cult Pro Polar Starter",
-  description: "Cult Pro Polar Starter",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://joindojo.co"),
+  title: {
+    default: "Dojo - Master Any Skill",
+    template: "%s | Dojo",
+  },
+  description:
+    "The first marketplace powered by cognitive scaffolding. Turn your expertise into income or master any skill in minutes a day.",
+  keywords: [
+    "micro-learning",
+    "online courses",
+    "skill development",
+    "creator economy",
+    "AI learning",
+    "cognitive scaffolding",
+    "education marketplace",
+  ],
+  authors: [{ name: "Dojo" }],
+  creator: "Dojo",
+  publisher: "Dojo",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Dojo",
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@joindojo",
+  },
 }
 
 export default function RootLayout({

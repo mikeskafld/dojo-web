@@ -85,3 +85,26 @@
   - Social proof stats should link to actual data sources in future (currently static)
 
 ---
+
+## 2026-01-30 - US-004: Create features grid section
+- **Status**: Completed
+- **Files**:
+  - app/(marketing)/dojo-features.tsx (new)
+  - app/(marketing)/page.tsx (updated import)
+- **What was implemented**:
+  - Created DojoFeaturesSection component with 6 Dojo-specific features
+  - Features: Universal Scaffolding, Feed-to-Mastery Funnel, AI-Powered Repurposing, Peer-Reviewed Discovery, Native Monetization, Low-Friction Mastery
+  - Section headline: "The First Marketplace Powered By Cognitive Scaffolding"
+  - Responsive grid: grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 (1x6 mobile, 2x3 tablet, 3x2 desktop)
+  - Each card has: lucide-react icon, title, description, dojo-card styling with hover glow
+  - Scroll-triggered animations using useInView with staggered reveal (staggerChildren: 0.1)
+  - Hover effects: y:-8 lift, border color change to --dojo-border-accent, subtle inset shadow
+- **Learnings for future iterations**:
+  - lucide-react provides good icons for features: Layers, Compass, Sparkles, Users, DollarSign, Zap
+  - Use useInView({ once: true, amount: 0.2 }) for scroll-triggered animations
+  - containerVariants/itemVariants pattern for staggered animations works well
+  - Hover glow overlay pattern: absolute positioned div with opacity transition
+  - The old marketing-features.tsx is still in the codebase but no longer used on homepage
+  - Build fails due to missing POLAR_WEBHOOK_SECRET but typecheck and lint pass
+
+---

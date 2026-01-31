@@ -2,10 +2,6 @@ import { Webhooks } from "@polar-sh/nextjs"
 
 import { handleSubscriptionChange } from "@/lib/db/service-role"
 
-if (!process.env.POLAR_WEBHOOK_SECRET) {
-  throw new Error("POLAR_WEBHOOK_SECRET is not set in environment variables.")
-}
-
 type SubscriptionEventType =
   | "subscription.created"
   | "subscription.updated"
@@ -108,7 +104,7 @@ const handleSubscriptionEvent = async (event: SubscriptionEvent) => {
 }
 
 export const POST = Webhooks({
-  webhookSecret: process.env.POLAR_WEBHOOK_SECRET,
+  webhookSecret: process.env.POLAR_WEBHOOK_SECRET || "",
   onSubscriptionCreated: async (subscription) => {
     await handleSubscriptionEvent({
       type: "subscription.created",

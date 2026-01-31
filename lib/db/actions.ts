@@ -119,3 +119,82 @@ export async function getPolarProducts() {
 
   return result.items
 }
+
+// Creator Application Form Types and Action
+export type CreatorApplicationFormData = {
+  name: string
+  email: string
+  niche: string
+  socialLink: string
+  audienceSize: string
+}
+
+export type CreatorApplicationResult = {
+  success: boolean
+  message: string
+  error?: string
+}
+
+export async function submitCreatorApplication(
+  data: CreatorApplicationFormData
+): Promise<CreatorApplicationResult> {
+  const supabase = await createClient()
+
+  // Validate required fields
+  if (!data.name || !data.email || !data.niche || !data.socialLink || !data.audienceSize) {
+    return {
+      success: false,
+      message: "All fields are required",
+      error: "VALIDATION_ERROR",
+    }
+  }
+
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(data.email)) {
+    return {
+      success: false,
+      message: "Please enter a valid email address",
+      error: "INVALID_EMAIL",
+    }
+  }
+
+  try {
+    const { error } = await supabase.from("creator_applications").insert({
+      name: data.name,
+      email: data.email.toLowerCase(),
+      niche: data.niche,
+      social_link: data.socialLink,
+      audience_size: data.audienceSize,
+    })
+
+    if (error) {
+      // Handle duplicate email error
+      if (error.code === "23505") {
+        return {
+          success: false,
+          message: "This email has already been submitted",
+          error: "DUPLICATE_EMAIL",
+        }
+      }
+      console.error("Error submitting creator application:", error)
+      return {
+        success: false,
+        message: "Something went wrong. Please try again.",
+        error: error.message,
+      }
+    }
+
+    return {
+      success: true,
+      message: "Application received! We'll be in touch soon.",
+    }
+  } catch (error) {
+    console.error("Error submitting creator application:", error)
+    return {
+      success: false,
+      message: "Something went wrong. Please try again.",
+      error: "UNKNOWN_ERROR",
+    }
+  }
+}

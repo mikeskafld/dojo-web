@@ -113,11 +113,15 @@ export async function getCompleteBillingDetails(): Promise<CompleteBillingDetail
 }
 
 export async function getPolarProducts() {
-  const { result } = await polarApi.products.list({
-    isArchived: false,
-  })
-
-  return result.items
+  try {
+    const { result } = await polarApi.products.list({
+      isArchived: false,
+    })
+    return result.items
+  } catch (error) {
+    console.error("Failed to fetch Polar products:", error)
+    return []
+  }
 }
 
 // Creator Application Form Types and Action

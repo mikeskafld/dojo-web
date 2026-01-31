@@ -13,6 +13,7 @@
 - Form submissions: Use server actions in lib/db/actions.ts with exported types (e.g., FormData, Result types)
 - Supabase RLS for anonymous inserts: Use `with check (true)` policy
 - No shadcn Select component - use native select with custom styling matching Input component
+- Lucide icons with JS global names (e.g., `Infinity`) must be aliased: `import { Infinity as InfinityIcon }` to avoid TypeScript conflicts with `repeat: Infinity` in animations
 
 ---
 
@@ -236,5 +237,27 @@
   - Problem statement pattern: Use destructive color variants (bg-destructive/10, text-destructive) for pain points
   - Solution teaser pattern: Follow problem with cyan-accented solution preview to create contrast
   - Page follows same animation patterns as homepage: useInView with once: true, amount: 0.2
+
+---
+
+## 2026-01-30 - US-010: Create dedicated For Learners page
+- **Status**: Completed
+- **Files**:
+  - app/(marketing)/for-learners/page.tsx (new)
+- **What was implemented**:
+  - Created /for-learners route as a client component page
+  - Hero section with "Master Any Skill, One Swipe at a Time" headline and badge
+  - Animated background gradient effects and glow orbs matching homepage/for-creators hero
+  - CTA buttons: "Join the Waitlist" (links to #waitlist) and "See How It Works" (links to /how-it-works)
+  - Value props section with 4 cards: Bite-Sized Micro-Lessons (3 min), Learn From Practitioners (Real), Peer Reviewed Quality, Free Path to Mastery
+  - "The Consumer Struggle" problem statement section with 4 pain points: Overwhelming Courses, Information Overload, Endless Scrolling, No Real Progress
+  - "The Dojo Solution" teaser with cyan accent styling: "Swipe. Learn. Master."
+  - Embedded LearnerWaitlistSection component at bottom with FadeIn wrapper
+  - Scroll-triggered animations using useInView with staggered reveals
+- **Learnings for future iterations**:
+  - When importing lucide-react icons that share names with JS globals (like `Infinity`), use alias: `import { Infinity as InfinityIcon }` to avoid TypeScript conflicts with `repeat: Infinity` in motion animations
+  - For Learners page follows same structure as For Creators: Hero → Value Props → Problem Statement → Solution Teaser → Form
+  - Consumer struggles focus on content consumption issues vs Creator struggles focusing on production issues
+  - Browser verification blocked by missing .env.local (Supabase credentials) - site-wide issue not specific to this page
 
 ---

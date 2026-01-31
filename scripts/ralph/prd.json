@@ -138,8 +138,8 @@
         "Verify in browser"
       ],
       "priority": 8,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Created LearnerWaitlistSection component with email, optional name, and interests multi-select. Server action handles validation and stores to Supabase. Migration creates learner_waitlist table with RLS for anonymous inserts."
     },
     {
       "id": "US-009",

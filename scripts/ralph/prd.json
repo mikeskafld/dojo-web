@@ -188,8 +188,8 @@
         "Verify in browser"
       ],
       "priority": 11,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Created /how-it-works page with hero section, The Dojo Engine visual flow diagram (Input -> Engine -> Output), For Creators 4-step journey, For Learners 4-step journey, The Marketplace Loop circular flywheel diagram, and dual CTAs for creators/learners."
     },
     {
       "id": "US-012",

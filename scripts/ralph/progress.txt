@@ -261,3 +261,34 @@
   - Browser verification blocked by missing .env.local (Supabase credentials) - site-wide issue not specific to this page
 
 ---
+
+## 2026-01-30 - US-011: Create How It Works page
+- **Status**: Completed
+- **Files**:
+  - app/(marketing)/how-it-works/page.tsx (new)
+- **What was implemented**:
+  - Created /how-it-works route as a client component page
+  - Hero section with "The Dojo Platform" headline and badge
+  - The Dojo Engine section: Reused visual flow pattern (Input → Engine → Output) from homepage how-it-works-section.tsx
+    - Input: YouTube, Course Videos, Podcasts
+    - Engine: Semantic Segmentation, Pedagogical Labeling, Synthesis Optimization
+    - Output: Sample micro-lesson card
+  - For Creators flow section: 4-step journey with connector lines between steps
+    - Steps: Upload Your Content → AI Transforms It → Learners Discover You → Earn Passively
+  - For Learners flow section: 4-step journey with connector lines between steps
+    - Steps: Discover Content → Learn in Minutes → Reinforce Knowledge → Track Mastery
+  - The Marketplace Loop section: Circular flywheel diagram with animated SVG arrows
+    - Desktop: Circular layout with center "dojo" logo and rotating dashed ring
+    - Mobile: Vertical list with connecting arrows
+    - Loop elements: Creators Upload → Dojo Transforms → Learners Discover → Everyone Wins
+  - CTA section with dual buttons: "Apply as Creator" and "Join as Learner"
+  - All sections have scroll-triggered animations using useInView
+- **Learnings for future iterations**:
+  - Circular layout pattern: Use absolute positioning with percentage-based positions for circular arrangements
+  - SVG animated paths: Use motion.path with pathLength animation for drawing arrow effects
+  - Step connector lines: Use absolute positioned divs with gradient backgrounds for desktop flow connections
+  - Number badge pattern: Large opacity-30 text behind icon creates depth effect
+  - Flywheel/loop diagram: Desktop uses circular SVG layout, mobile falls back to simple vertical list
+  - Reuse existing visual patterns (like Dojo Engine flow) by extracting data arrays
+
+---

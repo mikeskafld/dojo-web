@@ -11,6 +11,7 @@ Started: Sat Jan 31 10:39:57 PST 2026
 - Footer links to legal pages: `/terms` and `/privacy` routes defined in marketing-footer.tsx
 - URL parameters: use `useSearchParams()` to read, `router.replace()` with `{ scroll: false }` for shallow routing
 - Audience mode: `AudienceType` exported from marketing-hero.tsx, values are "creator" | "learner"
+- Form section IDs: `#apply` for creator application, `#waitlist` for learner waitlist - use for anchor navigation
 
 ---
 
@@ -172,4 +173,22 @@ Started: Sat Jan 31 10:39:57 PST 2026
   - Each flow can have different output card designs - creator shows revenue, learner shows progress
   - Section subheading also changes dynamically to match the audience focus
   - Icons added: Compass, Target, Award, Zap for learner flow; DollarSign, TrendingUp for creator flow
+---
+
+## 2026-01-31 14:30 - US-012
+- What was implemented: Cross-promotion CTAs in both Creator and Learner forms
+- Files changed:
+  - `app/(marketing)/creator-application-section.tsx`: Added "Learner? Join Waitlist!" CTA section
+  - `app/(marketing)/learner-waitlist-section.tsx`: Added "Creator? Apply Now!" CTA section
+- **Implementation details:**
+  - Each CTA appears below the privacy note with a separator border
+  - Creator form: Sparkles icon + "Learner? Join Waitlist!" button
+  - Learner form: Send icon + "Creator? Apply Now!" button
+  - Clicking updates URL mode param and scrolls to target form (#waitlist or #apply)
+  - Uses outline button variant with cyan hover effects (border + background)
+- **Learnings for future iterations:**
+  - Use `useRouter` and `useSearchParams` for mode switching with URL param updates
+  - `router.push()` with `{ scroll: false }` prevents automatic scroll, then use `setTimeout` + `scrollIntoView` for custom scroll behavior
+  - Cross-promo text uses "Want to [learn/teach] instead?" pattern for clarity
+  - Keep form IDs consistent (#apply for creator, #waitlist for learner) for anchor navigation
 ---

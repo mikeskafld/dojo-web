@@ -184,8 +184,8 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 12,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Added cross-promotion CTA sections to both forms. Creator form shows 'Learner? Join Waitlist!' with Sparkles icon. Learner form shows 'Creator? Apply Now!' with Send icon. CTAs use outline button variant with cyan hover effects. Clicking updates URL mode param and scrolls to target form section."
     },
     {
       "id": "US-013",

@@ -1,237 +1,224 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowRight } from "lucide-react"
-import { motion } from "motion/react"
+import { ArrowRight, Users, Sparkles, TrendingUp, BookOpen } from "lucide-react"
+import { motion, AnimatePresence } from "motion/react"
 
-import { useIsMobile } from "@/hooks/use-mobile"
 import { GlowEffect } from "@/components/bg-glow"
-import { GradientHeading } from "@/components/gradient-heading"
 import { Magnetic } from "@/components/magnetic"
-import { ProgressiveBlur } from "@/components/progressive-blur"
-import { ProximityHoverText } from "@/components/proximity-hover-effect"
-import { TextShimmerWave } from "@/components/text-shimmer"
-import { Tilt } from "@/components/tilt-card"
+import Link from "next/link"
 
-export function LandingHeroSection() {
-  const isMobile = useIsMobile()
-  return (
-    <div className="">
-      <div className="relative w-full flex gap-1 md:gap-0 flex-col md:flex-row ">
-        <motion.div
-          initial={{ opacity: isMobile ? 0.9 : 0, y: isMobile ? 4 : 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: isMobile ? 0.05 : 0.5 }}
-          className="relative  p-1   text-left md:text-left w-full bg-background   shadow-elevation-light dark:shadow-elevation-dark-three md:dark:shadow-elevation-dark"
-        >
-          {/* Main content */}
-          <motion.div
-            initial={{ opacity: isMobile ? 0.9 : 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: isMobile ? 0.15 : 0.5 }}
-            className="  space-y-2 md:space-y-8 lg:space-y-10 h-full mx-auto md:mx-0 w-full shadow-elevation-light dark:shadow-elevation-dark-three md:dark:shadow-elevation-dark px-4 py-12 md:px-8  p-1.5 bg-card/50"
-          >
-            {/* Eyebrow text */}
-            <div className="absolute bottom-0 right-12 hidden md:block">
-              <TextShimmerWave>Welcome to the Future</TextShimmerWave>
-            </div>
+type AudienceType = "creator" | "learner"
 
-            {/* Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="md:px-2  pt-2 lg:pt-18"
-            >
-              <div className="xl:hidden space-y-4">
-                <GradientHeading size="xxxl" weight="base">
-                  Vibe
-                </GradientHeading>
-                <GradientHeading size="xxxl" weight="base">
-                  Marketing
-                </GradientHeading>
-              </div>
-              <div className="hidden xl:block xl:space-y-8 ">
-                <ProximityHoverText
-                  text="Vibe"
-                  radius={0}
-                  className="leading-[0.5rem] md:leading-[6.5rem] text-[4rem]  lg:leading-8 xl:leading-10 sm:text-6xl lg:text-[8rem] font-black tracking-tight"
-                />
-
-                <ProximityHoverText
-                  text="Marketing"
-                  radius={2}
-                  className="leading-[0.5rem] md:leading-[6.5rem] text-[4rem]  lg:leading-8 xl:leading-10 sm:text-6xl lg:text-[7rem] tracking-tighter font-black"
-                />
-              </div>
-            </motion.div>
-
-            {/* Subheadline */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className=" max-w-xl text-2xl md:text-3xl leading-snug tracking-tight text-foreground pb-12 md:pb-4"
-            >
-              Get your brand to the next level with our Vibe Marketing platform.
-            </motion.p>
-
-            {/* CTA buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-col justify-start gap-5 px-2 sm:flex-row sm:gap-4 md:gap-8 "
-            >
-              <div className="relative">
-                <GlowEffect
-                  scale={0.8}
-                  mode="rotate"
-                  blur="strongest"
-                  className="absolute inset-0 px-6  md:px-12"
-                />
-                <Magnetic>
-                  <button
-                    type="button"
-                    className="w-full relative z-10 sm:w-auto inline-flex items-center justify-center px-6 py-3.5 md:py-4.5 md:px-9 text-xl md:text-2xl tracking-tight text-primary shadow-elevation-light dark:shadow-elevation-dark bg-secondary dark:bg-background/80 transition-all duration-300 hover:bg-secondary/80 group dark:hover:bg-background/60"
-                  >
-                    <span className="flex items-center gap-2 ">
-                      Enter the <span className="ss03">vibe</span>{" "}
-                      <ArrowRight className="size-5 md:size-6" />
-                    </span>
-                  </button>
-                </Magnetic>
-              </div>
-
-              <Magnetic>
-                <button
-                  type="button"
-                  className="hidden w-full sm:w-auto xl:inline-flex items-center justify-center shadow-elevation-light dark:shadow-elevation-dark tracking-tight px-6 py-3.5 md:py-4.5 md:px-9 text-xl md:text-2xl text-secondary-foreground transition-all duration-300    bg-secondary/30 hover:bg-secondary/80"
-                >
-                  <span>Learn More</span>
-                </button>
-              </Magnetic>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-        <HeroProductImage />
-      </div>
-    </div>
-  )
+const heroContent = {
+  creator: {
+    headline: "Turn Your Expertise Into Income",
+    subheadline: "Transform your knowledge into bite-sized lessons. Let AI handle the course structure while you focus on what you do best — creating.",
+    cta: "Apply as Creator",
+    ctaLink: "/for-creators#apply",
+  },
+  learner: {
+    headline: "Master Any Skill in Minutes a Day",
+    subheadline: "Learn from real practitioners through micro-lessons designed for how your brain actually works. Swipe your way to mastery.",
+    cta: "Join Waitlist",
+    ctaLink: "#waitlist",
+  },
 }
 
-function HeroProductImage() {
-  const [isHover, setIsHover] = useState(false)
+const socialProofStats = [
+  { value: "70%", label: "Creator Revenue Share", icon: TrendingUp },
+  { value: "3min", label: "Average Lesson Time", icon: BookOpen },
+  { value: "10K+", label: "Creators Interested", icon: Users },
+  { value: "AI", label: "Powered Scaffolding", icon: Sparkles },
+]
+
+export function LandingHeroSection() {
+  const [audience, setAudience] = useState<AudienceType>("learner")
+  const content = heroContent[audience]
 
   return (
-    <section className=" w-full ">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      {/* Background gradient effects */}
+      <div className="absolute inset-0 dojo-gradient-hero" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] dojo-gradient-radial opacity-50" />
+
+      {/* Subtle animated glow orbs */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-        className="w-full md:pl-4 "
-      >
-        <Tilt
-          rotationFactor={10}
-          isRevese
-          animateInitial
-          initialTiltX={20}
-          initialTiltY={30}
-          initialDelay={0}
-        >
-          <div
-            className="relative w-full max-w-[1800px]   mx-auto overflow-hidden bg-gradient-to-br from-card via-card/95 to-muted/90 shadow-elevation-light dark:shadow-elevation-dark-three md:dark:shadow-elevation-dark  p-1 transition-all duration-300"
-            onMouseEnter={() => setIsHover(true)}
-            onMouseLeave={() => setIsHover(false)}
+        className="absolute top-20 right-[15%] w-64 h-64 rounded-full opacity-20"
+        style={{ background: "radial-gradient(circle, var(--dojo-cyan) 0%, transparent 70%)" }}
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.3, 0.2],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute bottom-32 left-[10%] w-48 h-48 rounded-full opacity-15"
+        style={{ background: "radial-gradient(circle, var(--dojo-cyan) 0%, transparent 70%)" }}
+        animate={{
+          scale: [1.2, 1, 1.2],
+          opacity: [0.15, 0.25, 0.15],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
+        <div className="max-w-5xl mx-auto text-center">
+          {/* Audience Toggle */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex justify-center mb-8 md:mb-12"
           >
-            <div className="relative w-full overflow-hidden bg-card/20    p-1.5 shadow-elevation-light dark:shadow-elevation-dark-three md:dark:shadow-elevation-dark">
-              <div className=" group w-full">
-                <motion.img
-                  src="/place-3.png"
-                  alt="Product dashboard interface"
-                  width={1800}
-                  height={1080}
-                  className="w-full h-auto shadow-elevation-light dark:shadow-elevation-dark"
-                  whileHover={{
-                    scale: 1.008,
-                    // borderRadius: "0px 0px 12px 0px",
-                    transition: {
-                      type: "spring",
-                      bounce: 0.2,
-                      duration: 0.4,
-                    },
-                  }}
-                  initial={{
-                    scale: 1.008,
-                    // borderRadius: "0px 0px 12px 0px",
-                  }}
-                  animate={{
-                    scale: 1,
-                    // borderRadius: "0px 0px 9px 0px",
-                    transition: {
-                      delay: isHover ? 0 : 0.3,
-                      type: "spring",
-                      bounce: 0.2,
-                      duration: isHover ? 0.4 : 0.8,
-                    },
-                  }}
-                />
-                <ProgressiveBlur
-                  className="pointer-events-none absolute bottom-[2px]  left-[4px] h-[55%] w-[98.7%] mx-auto"
-                  blurIntensity={0.2}
-                  animate={isHover ? "visible" : "hidden"}
-                  variants={{
-                    hidden: {
-                      opacity: 0,
-
-                      // borderRadius: "0px 0px 9px 0px",
-                      transition: {
-                        delay: 0.1,
-                        type: "spring",
-                        bounce: 0.2,
-                        duration: 0.5,
-                        opacity: { duration: 0.2 },
-                        borderRadius: { duration: 0.1 },
-                      },
-                    },
-                    visible: {
-                      opacity: 1,
-
-                      // borderRadius: "0px 0px 12px 0px",
-                      transition: {
-                        delay: 0.1,
-                        type: "spring",
-                        bounce: 0.2,
-                        duration: 0.5,
-                        opacity: { duration: 0.2 },
-                        borderRadius: { duration: 0.1 },
-                      },
-                    },
-                  }}
-                />
-                <motion.div
-                  className="absolute bottom-0 left-0"
-                  animate={isHover ? "visible" : "hidden"}
-                  variants={{
-                    hidden: { opacity: 0 },
-                    visible: { opacity: 1 },
-                  }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                >
-                  <div className="flex flex-col items-start gap-0 px-5 py-4">
-                    <p className="text-xl lg:text-2xl font-bold text-white tracking-tight">
-                      Become the Vibe
-                    </p>
-                    <span className="text-lg lg:text-xl font-medium text-white/90 tracking-tight">
-                      Shift your brand to the next level
-                    </span>
-                  </div>
-                </motion.div>
-              </div>
+            <div className="inline-flex items-center p-1 rounded-full bg-[var(--dojo-bg-card)] border border-[var(--dojo-border)]">
+              <button
+                onClick={() => setAudience("creator")}
+                className={`relative px-4 py-2 md:px-6 md:py-2.5 text-sm md:text-base font-medium rounded-full transition-colors duration-300 ${
+                  audience === "creator"
+                    ? "text-[var(--dojo-bg)]"
+                    : "text-[var(--dojo-text-muted)] hover:text-[var(--dojo-text)]"
+                }`}
+              >
+                {audience === "creator" && (
+                  <motion.div
+                    layoutId="audience-toggle"
+                    className="absolute inset-0 rounded-full dojo-btn-primary"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">I&apos;m a Creator</span>
+              </button>
+              <button
+                onClick={() => setAudience("learner")}
+                className={`relative px-4 py-2 md:px-6 md:py-2.5 text-sm md:text-base font-medium rounded-full transition-colors duration-300 ${
+                  audience === "learner"
+                    ? "text-[var(--dojo-bg)]"
+                    : "text-[var(--dojo-text-muted)] hover:text-[var(--dojo-text)]"
+                }`}
+              >
+                {audience === "learner" && (
+                  <motion.div
+                    layoutId="audience-toggle"
+                    className="absolute inset-0 rounded-full dojo-btn-primary"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">I&apos;m a Learner</span>
+              </button>
             </div>
+          </motion.div>
+
+          {/* Dynamic Headline */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={audience}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6 md:space-y-8"
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight">
+                <span className="dojo-text-gradient">{content.headline}</span>
+              </h1>
+
+              <p className="max-w-2xl mx-auto text-lg md:text-xl lg:text-2xl text-[var(--dojo-text-muted)] leading-relaxed">
+                {content.subheadline}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 md:mt-12"
+          >
+            <div className="relative">
+              <GlowEffect
+                scale={0.9}
+                mode="rotate"
+                blur="strongest"
+                className="absolute inset-0"
+              />
+              <Magnetic>
+                <Link
+                  href={content.ctaLink}
+                  className="relative z-10 inline-flex items-center justify-center gap-2 px-6 py-3.5 md:px-8 md:py-4 text-base md:text-lg font-semibold rounded-lg dojo-btn-primary"
+                >
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={content.cta}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex items-center gap-2"
+                    >
+                      {content.cta}
+                      <ArrowRight className="w-5 h-5" />
+                    </motion.span>
+                  </AnimatePresence>
+                </Link>
+              </Magnetic>
+            </div>
+
+            <Link
+              href="/how-it-works"
+              className="inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 text-base md:text-lg font-medium rounded-lg dojo-btn-secondary"
+            >
+              Learn How It Works
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Floating Social Proof Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-16 md:mt-24"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
+            {socialProofStats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
+                whileHover={{
+                  y: -4,
+                  transition: { duration: 0.2 }
+                }}
+                className="group relative p-4 md:p-6 rounded-xl dojo-card"
+              >
+                {/* Hover glow effect */}
+                <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 dojo-glow-subtle" />
+
+                <div className="relative flex flex-col items-center text-center space-y-2">
+                  <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-[var(--dojo-cyan)] mb-1" />
+                  <span className="text-2xl md:text-3xl font-bold text-[var(--dojo-cyan)]">
+                    {stat.value}
+                  </span>
+                  <span className="text-xs md:text-sm text-[var(--dojo-text-muted)]">
+                    {stat.label}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </Tilt>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   )
 }
